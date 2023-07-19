@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+WSGI/
 
 # Spyder project settings
 .spyderproject
