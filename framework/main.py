@@ -1,4 +1,4 @@
-from framework.requests import params_handler
+from framework.handlers import params_handler
 
 
 class PageNotFound404:
