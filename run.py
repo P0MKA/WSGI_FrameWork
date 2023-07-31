@@ -7,7 +7,7 @@ from framework.urls import routes, fronts
 
 app = Framework(routes, fronts)
 app = WhiteNoise(app)
-app.add_files('./static', 'static/')
+app.add_files("./static", "static/")
 
 with make_server('', 8000, app) as httpd:
     print("Полетели на порту 8000...")

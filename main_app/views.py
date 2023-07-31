@@ -18,3 +18,9 @@ class AboutView(TemplateView):
 
 class ContactsView(TemplateView):
     template_name = "contacts.html"
+
+    def __call__(self, request):
+        if request["method"] == "POST":
+            message = request["params"]
+            print(message)
+        return super().__call__(request)
