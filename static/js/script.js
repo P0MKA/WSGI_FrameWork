@@ -1,4 +1,4 @@
-const menubarEl = document.querySelector('#menubar');
+const menubarEl = document.querySelector('#menu');
 const aEls = menubarEl.querySelectorAll('a');
 const path = window.location.href
 
