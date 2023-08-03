@@ -29,6 +29,8 @@ class Engine:
         return course
 
     def get_course(self, name):
+        while name.endswith('_copy'):
+            name = name[:-5]
         for category in self.state["categories"]:
             for course in category.courses:
                 if course.name == name:

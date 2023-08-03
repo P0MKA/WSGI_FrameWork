@@ -32,10 +32,10 @@ class BaseLogger(type):
 class Logger(metaclass=BaseLogger):
         def __init__(self, name):
             self.name = name
-        
-        def log(self, message):
             if not os.path.exists("./log_files/{self.name}.log"):
                 os.makedirs("./log_files/{self.name}.log")
+        
+        def log(self, message):
             with open(f"./log_files/{self.name}.log", "a+", encoding="utf-8") as f:
                 f.write(f"[{datetime.now()}] : {message}\n")
 
