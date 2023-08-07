@@ -1,5 +1,4 @@
 from datetime import date
-import main_app.views as main_app
 
 def secret_front(request):
     request['date'] = date.today()

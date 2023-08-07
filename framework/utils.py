@@ -1,4 +1,3 @@
-from typing import Any
 from urllib.parse import unquote
 from datetime import datetime
 from time import perf_counter

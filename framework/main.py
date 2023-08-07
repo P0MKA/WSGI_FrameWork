@@ -1,3 +1,4 @@
+from main_app import views
 from framework.handlers import params_handler
 
 

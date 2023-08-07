@@ -1,8 +1,9 @@
+from http import HTTPStatus
+
 from framework.templator import render
 from framework.utils import Logger, route, debug
 from main_app.engine import Engine
 
-from http import HTTPStatus
 
 engine = Engine()
 logger = Logger(f"{__name__}")
@@ -25,7 +26,7 @@ class IndexView(TemplateView):
 class AboutView(TemplateView):
     template_name = "about.html"
     
-
+@route("/contacts/")
 class ContactsView(TemplateView):
     template_name = "contacts.html"
     @debug
