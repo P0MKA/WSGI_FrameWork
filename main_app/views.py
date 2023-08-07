@@ -1,5 +1,5 @@
 from framework.templator import render
-from framework.utils import Logger, route
+from framework.utils import Logger, route, debug
 from main_app.engine import Engine
 
 from http import HTTPStatus
@@ -28,7 +28,7 @@ class AboutView(TemplateView):
 
 class ContactsView(TemplateView):
     template_name = "contacts.html"
-
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             message = request["params"]
@@ -39,6 +39,7 @@ route("/categories/create/")
 class CreateCategoryView(TemplateView):
     template_name = "create_category.html"
 
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             data = request["params"]
@@ -62,6 +63,7 @@ class CategoryListView(TemplateView):
 class CreateCourseView(TemplateView):
     template_name = "create_course.html"
 
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             data = request["params"]
@@ -90,6 +92,7 @@ class CoursesListView(TemplateView):
 class CopyCourseView(TemplateView):
     template_name = "courses_list.html"
 
+    @debug
     def __call__(self, request):
         data = request["params"]
         name = data.get("name")
