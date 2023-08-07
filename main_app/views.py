@@ -1,6 +1,7 @@
 from framework.templator import render
-from framework.utils import Logger
+from framework.utils import Logger, route
 from main_app.engine import Engine
+
 from http import HTTPStatus
 
 engine = Engine()
@@ -16,11 +17,11 @@ class TemplateView:
         logger.log(f'request {request["method"]} {self.template_name}')
         return f"{HTTPStatus.OK} OK", render(self.template_name, context=request)
 
-
+@route("/")
 class IndexView(TemplateView):
     pass
 
-
+@route("/about/")
 class AboutView(TemplateView):
     template_name = "about.html"
     
@@ -34,6 +35,7 @@ class ContactsView(TemplateView):
             logger.log(message)
         return super().__call__(request)
     
+route("/categories/create/")    
 class CreateCategoryView(TemplateView):
     template_name = "create_category.html"
 
@@ -50,10 +52,13 @@ class CreateCategoryView(TemplateView):
         else:
             return super().__call__(request)
         
+
+@route("/categories/")        
 class CategoryListView(TemplateView):
     template_name = "category_list.html"
 
 
+@route("/courses/create/")
 class CreateCourseView(TemplateView):
     template_name = "create_course.html"
 
@@ -77,10 +82,11 @@ class CreateCourseView(TemplateView):
             return super().__call__(request)
 
 
+@route("/courses/")
 class CoursesListView(TemplateView):
     template_name = "courses_list.html"
 
-
+@route("/courses/copy/")
 class CopyCourseView(TemplateView):
     template_name = "courses_list.html"
 

@@ -3,6 +3,8 @@ from urllib.parse import unquote
 from datetime import datetime
 import os
 
+from framework.urls import routes
+
 
 def parse_request_params(params):
     data = {}
@@ -38,6 +40,19 @@ class Logger(metaclass=BaseLogger):
         def log(self, message):
             with open(f"./log_files/{self.name}.log", "a+", encoding="utf-8") as f:
                 f.write(f"[{datetime.now()}] : {message}\n")
+
+def route(path):
+    def wrapper(cls):
+        def _wrapper(*args, **kwargs):
+            return routes[path](*args, **kwargs)
+
+        view = routes.get(path)
+        if not view:
+            routes[path] = cls()
+
+        return _wrapper
+
+    return wrapper
 
 
 if __name__ == "__main__":
