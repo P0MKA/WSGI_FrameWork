@@ -36,7 +36,7 @@ class ContactsView(TemplateView):
             logger.log(message)
         return super().__call__(request)
     
-route("/categories/create/")    
+@route("/categories/create/")    
 class CreateCategoryView(TemplateView):
     template_name = "create_category.html"
 
