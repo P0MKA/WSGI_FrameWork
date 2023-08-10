@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Registrations</h1>
+{% block title %}
+Registration
+{% endblock %}
+
+<h1>Registration</h1>
 <form method="post">
 <div class="form_settings">
     <p><span>Username</span><input type="text" name="username" placeholder="Username" /></p>

@@ -168,10 +168,6 @@ ul#menu li a
   color: #FFF;
   border: none;} 
 
-ul#menu.fl-right {
-    float: right;
-  }
- 
 ul#menu li.selected a
 { height: 20px;
   padding: 7px 15px 4px 15px;}

@@ -14,6 +14,19 @@ def parse_request_params(params):
             data[key] = value
     return data
 
+class ConsoleWriter:
+    def write(self, message):
+        print(f"[{datetime.now()}] : {message}")
+
+
+class FileWriter:
+    def __init__(self) -> None:
+        self.path = f"./log_files/server.log"
+
+    def write(self, message):
+        with open(self.path, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now()}] : {message}\n")
+
 class BaseLogger(type):
     def __init__(cls, name, bases, attrs):
         super().__init__(name, bases, attrs)
@@ -34,12 +47,12 @@ class BaseLogger(type):
 class Logger(metaclass=BaseLogger):
         def __init__(self, name):
             self.name = name
-            if not os.path.exists("./log_files/{self.name}.log"):
-                os.makedirs("./log_files/{self.name}.log")
+            self.writers = [ConsoleWriter(), FileWriter()]
         
-        def log(self, message):
-            with open(f"./log_files/{self.name}.log", "a+", encoding="utf-8") as f:
-                f.write(f"[{datetime.now()}] : {message}\n")
+        def log(self, massage):
+            for writer in self.writers:
+                writer.write(massage)
+
 
 def route(path):
     def wrapper(cls):
