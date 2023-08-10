@@ -49,7 +49,7 @@ class CreateCategoryView(TemplateView):
                 engine.create_category(name)
             logger.log(f'request {request["method"]} create category {data}')
             return f"{HTTPStatus.CREATED} CREATED", render(
-                "index.html", context=request
+                "courses_list.html", context=request
             )
         else:
             return super().__call__(request)
@@ -100,4 +100,23 @@ class CopyCourseView(TemplateView):
         course = engine.get_course(name)
         course.clone()
         return super().__call__(request)
-        
+    
+@route("/auth/register/")
+class RegisterView(TemplateView):
+    template_name = "register.html"
+
+    @debug
+    def __call__(self, request):
+        if request["method"] == "POST":
+            data = request["params"]
+            username = data.get("username")
+            if username:
+                engine.create_user(
+                    username,
+                    data.get("email"),
+                    data.get("phone"),
+                )
+                return f"{HTTPStatus.CREATED} CREATED", render(
+                    "index.html", context=request
+                )
+        return super().__call__(request)
