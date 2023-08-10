@@ -1,7 +1,9 @@
-from framework.templator import render
-from framework.utils import Logger
-from main_app.engine import Engine
 from http import HTTPStatus
+
+from framework.templator import render
+from framework.utils import Logger, route, debug
+from main_app.engine import Engine
+
 
 engine = Engine()
 logger = Logger(f"{__name__}")
@@ -16,27 +18,29 @@ class TemplateView:
         logger.log(f'request {request["method"]} {self.template_name}')
         return f"{HTTPStatus.OK} OK", render(self.template_name, context=request)
 
-
+@route("/")
 class IndexView(TemplateView):
     pass
 
-
+@route("/about/")
 class AboutView(TemplateView):
     template_name = "about.html"
     
-
+@route("/contacts/")
 class ContactsView(TemplateView):
     template_name = "contacts.html"
-
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             message = request["params"]
             logger.log(message)
         return super().__call__(request)
     
+@route("/categories/create/")    
 class CreateCategoryView(TemplateView):
     template_name = "create_category.html"
 
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             data = request["params"]
@@ -50,13 +54,17 @@ class CreateCategoryView(TemplateView):
         else:
             return super().__call__(request)
         
+
+@route("/categories/")        
 class CategoryListView(TemplateView):
     template_name = "category_list.html"
 
 
+@route("/courses/create/")
 class CreateCourseView(TemplateView):
     template_name = "create_course.html"
 
+    @debug
     def __call__(self, request):
         if request["method"] == "POST":
             data = request["params"]
@@ -77,13 +85,15 @@ class CreateCourseView(TemplateView):
             return super().__call__(request)
 
 
+@route("/courses/")
 class CoursesListView(TemplateView):
     template_name = "courses_list.html"
 
-
+@route("/courses/copy/")
 class CopyCourseView(TemplateView):
     template_name = "courses_list.html"
 
+    @debug
     def __call__(self, request):
         data = request["params"]
         name = data.get("name")
