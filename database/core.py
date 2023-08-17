@@ -1,7 +1,9 @@
 from threading import local
 from sqlite3 import Connection
 
-DATABASE_URI = "sqlite3"
+from framework.settings import DATABASE_URI
+
+#DATABASE_URI = "db.sqlite3"
 
 
 class Session:
