@@ -60,7 +60,7 @@ class UserMapper(BaseRegisteredClass):
 
 class User(Objects):
     mapper = "UserMapper"
-    count = 0
+    count = 1
 
     def __init__(self, username, email, phone, id=None):
         if not id:

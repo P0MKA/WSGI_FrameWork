@@ -21,6 +21,8 @@ class ConsoleWriter:
 
 class FileWriter:
     def __init__(self) -> None:
+        if not os.path.exists('log_files'):
+            os.mkdir('log_files')
         self.path = f"./log_files/server.log"
 
     def write(self, message):
