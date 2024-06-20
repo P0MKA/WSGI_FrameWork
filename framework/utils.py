@@ -21,6 +21,8 @@ class ConsoleWriter:
 
 class FileWriter:
     def __init__(self) -> None:
+        if not os.path.exists('log_files'):
+            os.mkdir('log_files')
         self.path = f"./log_files/server.log"
 
     def write(self, message):
@@ -76,6 +78,23 @@ def debug(func):
         return result
 
     return timed
+
+class MapperRegistry(type):
+    REGISTRY = {}
+
+    def __new__(cls, name, bases, attrs):
+        new_cls = type.__new__(cls, name, bases, attrs)
+        cls.REGISTRY[new_cls.__name__] = new_cls
+        return new_cls
+
+    @classmethod
+    def get_registry(cls):
+        return dict(cls.REGISTRY)
+
+
+class BaseRegisteredClass(metaclass=MapperRegistry):
+    pass
+
 
 
 

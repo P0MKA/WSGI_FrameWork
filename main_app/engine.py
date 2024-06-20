@@ -22,7 +22,7 @@ class Engine:
         for item in self.state["categories"]:
             if item.id == id:
                 return item
-        raise Exception(f"Category {id=} not found")
+        raise Exception(f"Category {id} not found")
 
     def create_course(self, course_type, name, category, **kwargs):
         course = CourseFactory.create(course_type, name, category, **kwargs)
